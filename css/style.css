@@ -1,0 +1,14 @@
+body {
+    background-color: black;
+    font-size: 150px;
+    color: red;
+    text-transform: capitalize;
+    display: flex;
+    justify-content: center;
+    padding-top: 20%;
+}
+
+#countdown {
+    font-weight: 600;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
