@@ -1,53 +1,56 @@
-// Un alert() espone 5 numeri generati casualmente.
-// Da li parte un timer di 30 secondi.
-// Dopo 30 secondi l'utente deve inserire, uno alla volta, 
-// i numeri che ha visto precedentemente, tramite il prompt().
-// Dopo che sono stati inseriti i 5 numeri,
-// il software dice quanti e quali dei numeri da indovinare sono stati individuati.
+// Un alert espone 5 numeri casuali. Da li parte un timer di 30 secondi.
+// Dopo 30 secondi l'utente deve inserire un prompt
+//  alla volta i numeri che ha visto precedentemente. 
+// Dopo che sono stati inseriti i 5 numeri, 
+// il software dice quanti e quali dei numeri da indovinare sono stati individuati
 
-
-// creo due array 
 var randomNumbers = [];
-var userNumbers = [];
+var numeriEstratti = 5;
 
+// var numeroRandom = numeriRandom(1,100);
+// console.log(numeroRandom);
 
-// creo un alert con i 5 numeri random
-while (randomNumbers.length < 5) {
-    var numeroCasuale = Math.floor(Math.random() * 100 ) +1;
-
-    if (!randomNumbers.includes(numeroCasuale)) {
-        randomNumbers.push(numeroCasuale);
-    }  
+while(randomNumbers.length < numeriEstratti){
+    var numeroRandom = numeriRandom(1,6);
+    if(!randomNumbers.includes(numeroRandom)){
+        randomNumbers.push(numeroRandom);
+    }
+    
 }
+console.log(randomNumbers);
+
 alert(randomNumbers);
 
+setTimeout(inserisciNumeri, 30000);
 
-// timer 30 secondi
-var timeleft = 2;
-var downloadTimer = setInterval(function(){
-  document.getElementById("countdown").innerHTML = timeleft + " seconds remaining";
-  timeleft -= 1;
-  if(timeleft <= 0){
-    clearInterval();
-    document.getElementById("countdown").innerHTML = "Finished"
-  }
-}, 1000);
+function inserisciNumeri(){
 
 
- // Chiedo i 5 numeri all utente
-
-for(i = 0; i < 5; i++) {
-var usNumber = parseInt(prompt('Inserisci un numero che ti ricordi'));
-if (!randomNumbers.includes(usNumber)) {
-    userNumbers.push(usNumber);
-} else {
-    alert('Numero precendentemente utilizzato!');
-}
-}    
+    var risultato = indovinaNumeri(randomNumbers);
+    console.log(risultato);
+        
     
-// Confronto i numeri dell'utente e quelli random, quelli che coincidono li stampo. Segno il punteggio.
-for(i = 0; i < 5; i++) {
-    if(userNumber[i] == randomNumbers[i]) {
-    document.getElementById("countdown").innerHTML = userNumber[i] + 'Hai ottenuto ' + userNumber[i] + 'Punti';
+    if(risultato.length == 0) {
+        console.log('non hai indovinato nessun numero');
+    } else {
+        console.log('hai indovinato ' + risultato.length + ' numeri e sono : ' + risultato);
     }
+}
+
+function indovinaNumeri(arrayRandom){
+    var users = [];
+    
+        for(var i = 0; i < 5; i++){
+            var numeroUtente = parseInt(prompt('Dammi un numero'));
+            if(arrayRandom.includes(numeroUtente) && !users.includes(numeroUtente)){
+                users.push(numeroUtente);
+            }
+        }
+        return users;
+}
+
+// console.log('fuori da timeout', users);//da err undefined
+
+function numeriRandom(min,max){
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
